@@ -1,0 +1,143 @@
+/*Todos list pad*/
+.container {
+  background-color: white;
+  width: 320px;
+  height: 100%;
+  margin:0 auto;
+  margin-top: 20px;
+  padding-bottom: 50px;
+  box-shadow:
+        10px 20px 50px #29295e;
+}
+
+/*Header*/
+.navBar {
+  background: #29295e;
+  margin-bottom: 10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:320px;
+  height:50px;
+  position: relative;
+}
+
+.title-img {
+  width: 110px;
+}
+
+.dropdown-menu-icon {
+  display: inline-block;
+  left:15px;
+  position: absolute;
+}
+
+.dropdown-img {
+  width: 25px;
+  height: 20px;
+}
+
+.create-icon {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+
+.add-btn {
+  width: 25px;
+  height: 25px;
+}
+
+/*Todos list body*/
+.todos-list{
+  margin-left: -15px;
+}
+
+.list-item {
+  padding: 5px;
+}
+
+/*Prepare the list*/
+ul.list-row li {
+
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  list-style-type: none;
+  margin-bottom: 1em;
+  padding: 0.25em 0 0 2.5em;
+  position: relative;
+}
+
+/*Create the circle*/
+ul.circle li:before {
+  content: " ";
+  display: block;
+  border: solid 0.2em #29295e;
+  border-radius: 2em;
+  height: 1em;
+  width: 1em;
+  position: absolute;
+  left: 0.5em;
+  top: 40%;
+  margin-top: -0.3em;
+}
+
+/*Create the checkmark*/
+ul.checkedmark li:before {
+  content: " ";
+  display: block;
+  border: solid 0.8em #29295e;
+  border-radius: .8em;
+  height: 0;
+  width: 0;
+  position: absolute;
+  left: 0.5em;
+  top: 40%;
+  margin-top: -0.5em;
+}
+
+ul.checkedmark li:after {
+  content: " ";
+  display: block;
+  width: 0.3em;
+  height: 0.6em;
+  border: solid white;
+  border-width: 0 0.2em 0.2em 0;
+  position: absolute;
+  left: 1em;
+  top: 40%;
+  margin-top: -0.2em;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.createInput {
+  /* Size and position */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 5px;
+  margin-top: -10px;
+
+  /* Color and shape */
+  background: linear-gradient(#29295e, #000);
+  border: 1px solid #000;
+  box-shadow:
+        0 1px 0 rgba(255,255,255,0.1);
+  border-radius: 1px;
+
+  /* Font styles */
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  font-size: 16px;
+  position: relative;
+  z-index: 10;
+}
+
+.close-btn {
+  float: right;
+  margin-top: -20px;
+  position: relative;
+  z-index: 11;
+}
