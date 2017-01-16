@@ -1,14 +1,25 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import CreateTodo from './create-todo';
 import TodosList from './todos-list';
+require("style-loader!css-loader!./app.css");
 
 const todos = [
     {
-        task: 'make React Tutorial',
-        isCompleted: false
-    }, {
-        task: 'eat dinner',
+        task: 'finish todos-react app',
         isCompleted: true
+    }, {
+        task: 'make dinner',
+        isCompleted: true
+    } , {
+        task: 'clean apertment',
+        isCompleted: false
+    } , {
+        task: 'watch a movie',
+        isCompleted: false
+    } , {
+        task: 'call mom',
+        isCompleted: false
     }
 ]
 
@@ -17,26 +28,88 @@ export default class App extends React.Component {
       super(props);
 
       this.state = {
-        todos
+        todos,
+        isCreating: false,
+        onAction: false
       }
     }
 
     render() {
+
         return (
-          <div>
-            <h1> React Todos App </h1>
-            <CreateTodo
-                todos = {this.state.todos}
-                createTask={this.createTask.bind(this)}/>
-            <TodosList
-                todos = {this.state.todos}
-                createTask={this.createTask.bind(this)}
-                toggleTask={this.toggleTask.bind(this)}
-                saveTask={this.saveTask.bind(this)}
-                deleteTask={this.deleteTask.bind(this)}
-            />
+          <div className='container'>
+              <nav className='navBar'>
+                <div className='dropdown-menu-icon' onClick={this.onActionClick.bind(this)}>
+                  <img className='dropdown-img' src="src/static/dropdown.png" alt='menu icon'/>
+                </div>
+                <div>
+                  <img  className='title-img' src="src/static/title.png" alt='to do list title'/>
+                </div>
+                <div className='create-icon' onClick={this.onCreateClick.bind(this)}>
+                  <img  className='add-btn' src="src/static/addbtn.png" alt='create new to do icon'/>
+                </div>
+              </nav>
+
+              <div id='a'>
+                  {this.renderCreateSection()}
+                  {this.renderCloseBtn()}
+              </div>
+
+
+              <div className='todos-list'>
+                  <TodosList
+                      onAction = {this.state.onAction}
+                      todos = {this.state.todos}
+                      createTask={this.createTask.bind(this)}
+                      toggleTask={this.toggleTask.bind(this)}
+                      saveTask={this.saveTask.bind(this)}
+                      deleteTask={this.deleteTask.bind(this)}
+                  />
+              </div>
+
           </div>
         )
+    }
+
+    onCreateClick() {
+        this.setState({ isCreating: true })
+    }
+
+    onActionClick() {
+      if(this.state.onAction === false){
+        this.setState({ onAction: true })
+      }
+      if(this.state.onAction === true){
+        this.setState({ onAction: false })
+      }
+    }
+
+    onCloseClick() {
+        this.setState({ isCreating: false })
+    }
+
+    renderCreateSection() {
+      if(this.state.isCreating){
+        return (
+          <CreateTodo
+              todos = {this.state.todos}
+              isCreating = {this.state.isCreating}
+              createTask={this.createTask.bind(this)}
+              onCloseClick = {this.onCloseClick.bind(this)}
+          />
+
+        )
+      }
+      return;
+    }
+
+    renderCloseBtn() {
+      if(this.state.isCreating){
+        return(
+            <button onClick={this.onCloseClick.bind(this)} className='close-btn'>X</button>
+        )
+      }
+      return;
     }
 
     toggleTask(task) {

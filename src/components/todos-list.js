@@ -10,14 +10,9 @@ export default class TodosList extends React.Component {
     }
     render() {
         return (
-          <table>
-            <TodosListHeader />
-            <tbody>
-              {this.renderItems()}
-            </tbody>
-          </table>
+          <div>
+            {this.renderItems()}
+          </div>
         );
     }
-
-
 }

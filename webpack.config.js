@@ -21,7 +21,10 @@ module.exports = {
             test: /\.jsx?$/,
             exclude: /node_modules/,
             loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
-        }]
+        },
+        { test: /\.png$/, loader: "url-loader?limit=100000" },
+        { test: /\.jpg$/, loader: "file-loader" },
+        ]
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

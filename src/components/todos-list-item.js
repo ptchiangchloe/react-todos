@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class TodosListHeader extends React.Component {
+export default class TodosListItem extends React.Component {
     constructor(props) {
         super(props);
 
@@ -9,57 +9,96 @@ export default class TodosListHeader extends React.Component {
         };
     }
 
+    renderRow() {
+      if(this.props.isCompleted && this.props.onAction){
+
+        return (
+          <ul className="checkedmark list-row">
+            <li onClick={this.props.toggleTask.bind(this, this.props.task)}>
+              {this.renderTaskSection()}
+              {this.renderActionsSection()}
+            </li>
+          </ul>
+        )
+      }else if (this.props.isCompleted && !this.props.onAction) {
+        return (
+          <ul className="checkedmark list-row">
+            <li onClick={this.props.toggleTask.bind(this, this.props.task)}>
+              {this.renderTaskSection()}
+            </li>
+          </ul>
+        )
+      }else if (!this.props.isCompleted && this.props.onAction) {
+        return (
+          <ul className="circle list-row">
+            <li onClick={this.props.toggleTask.bind(this, this.props.task)}>
+              {this.renderTaskSection()}
+              {this.renderActionsSection()}
+            </li>
+          </ul>
+        )
+      }
+
+        return (
+          <ul className="circle list-row">
+            <li onClick={this.props.toggleTask.bind(this, this.props.task)}>
+              {this.renderTaskSection()}
+            </li>
+          </ul>
+        )
+
+    }
+
     renderTaskSection() {
       const { task, isCompleted } = this.props;
-      console.log(this.props);
       const taskStyle = {
-        color: isCompleted? 'green' : 'red',
+        color: isCompleted? '#29295e' : 'red',
         cursor: 'pointer'
       };
 
       if (this.state.isEditing) {
         return (
-          <td>
+          <div>
             <form onSubmit={this.onSaveClick.bind(this)}>
             <input type="text" defaultValue={task} ref="editInput" />
             </form>
-          </td>
+          </div>
         )
       }
 
       return (
-        <td style={taskStyle}
-            onClick={this.props.toggleTask.bind(this, task)}
+        <div style={taskStyle}
+
         >
+
             {task}
-        </td>
+        </div>
       );
     }
 
     renderActionsSection() {
         if (this.state.isEditing) {
             return (
-                <td>
+                <div>
                     <button onClick={this.onSaveClick.bind(this)}> Save </button>
                     <button onClick={this.onCancelClick.bind(this)}>Cancel</button>
-                </td>
+                </div>
             );
         }
 
         return (
-          <td>
+          <div>
               <button onClick={this.onEditClick.bind(this)}>Edit</button>
-            <button onClick={this.props.deleteTask.bind(this, this.props.task)}>Delete</button>
-          </td>
+              <button onClick={this.props.deleteTask.bind(this, this.props.task)}>Delete</button>
+          </div>
         )
     }
 
     render() {
         return (
-          <tr>
-            {this.renderTaskSection()}
-            {this.renderActionsSection()}
-          </tr>
+            <div className='list-item'>
+                {this.renderRow()}
+            </div>
         );
     }
 
